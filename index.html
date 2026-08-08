@@ -617,7 +617,16 @@ const T = {
   }
 };
 
-let currentLang = 'fr';
+const supportedLangs = ['fr','en','nl','de','it'];
+function detectLang(){
+  const browserLangs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'fr'];
+  for (const bl of browserLangs) {
+    const code = bl.slice(0,2).toLowerCase();
+    if (supportedLangs.includes(code)) return code;
+  }
+  return 'fr';
+}
+let currentLang = detectLang();
 const currentProp = 'berck';
 
 const langSelect = document.getElementById('lang-select');
